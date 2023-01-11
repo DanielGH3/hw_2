@@ -1,35 +1,32 @@
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
-public class Task<T> implements Runnable, Callable<T>, Comparable<Task<?>>{
-    Callable<T> action;
+public class Task<T> extends FutureTask<T> implements Comparable<Task<?>>{
     TaskType type;
 
     public Task(Callable<T> action){
-        this.action = action;
+        super(action);
         type = TaskType.OTHER;
     }
 
     public Task(Callable<T> action, TaskType type){
-        this.action = action;
+        super(action);
         this.type = type;
     }
 
     @Override
     public void run() {
-        try {
-            this.call();
-        } catch (Exception e) {
-            System.out.println("Task runtine error.");
-        }
-    }
-
-    @Override
-    public T call() throws Exception {
-        return action.call();
+        super.run();
     }
 
     public int getPriorityValue(){
         return type.getPriorityValue();
+    }
+
+    @Override
+    public T get() throws InterruptedException, ExecutionException {
+        return super.get();
     }
 
     @Override

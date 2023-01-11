@@ -17,7 +17,7 @@ public class App {
 
         CustomExecutor exx = new CustomExecutor();
 
-        Task t1 =  Task.createTask(
+        var t1 =  Task.createTask(
             ()->{try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -26,17 +26,17 @@ public class App {
             TaskType.OTHER
         );
 
-        Task t2 =  Task.createTask(
+        var t2 =  Task.createTask(
             ()->{System.out.println("hello2"); return 1;},
             TaskType.OTHER
         );
 
-        Task t3 =  Task.createTask(
+        var t3 =  Task.createTask(
             ()->{System.out.println("hello1"); return 1;},
             TaskType.COMPUTATIONAL
         );    
 
-        Callable c = new Callable<Integer>() {
+        var c = new Callable<Integer>() {
             @Override
             public Integer call(){
                 System.out.println("hello1.1");
@@ -49,6 +49,6 @@ public class App {
         exx.submit(t2);
         exx.submit(t3);
 
-        exx.shutdown();
+        exx.gracefullyTerminate();
     }
 }

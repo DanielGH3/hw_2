@@ -33,19 +33,20 @@ public class CustomExecutor {
     }
 
 
-    public void submit(Task<?> task){
-        pool.execute(task);        
+    public <T> Task<T> submit(Task<T> task){
+        pool.execute(task);      
+        return task;  
     }
 
-    public void submit(Callable<?> callable){
-        submit(Task.createTask(callable));
+    public <T> Task<T> submit(Callable<T> callable){
+        return submit(Task.createTask(callable));
     }
 
-    public void submit(Callable<?> callable, TaskType type){
-        submit(Task.createTask(callable, type));
+    public <T> Task<T> submit(Callable<T> callable, TaskType type){
+        return submit(Task.createTask(callable, type));
     }
 
-    public int getCurrentMax(){//O(a) == O(1)
+    public int getCurrentMax(){ //O(a) == O(1)
         for(int i = 0; i < priorities.length; i++){
             if(priorities[i] != 0)
                 return i + DEFUALT_MIN_PRIORATY;
@@ -53,7 +54,7 @@ public class CustomExecutor {
         return DEFUALT_MAX_PRIORATY;
     }
 
-    public void shutdown(){
+    public void gracefullyTerminate(){
         pool.shutdown();
     }
 }
