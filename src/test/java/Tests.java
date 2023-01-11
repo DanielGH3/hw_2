@@ -24,9 +24,9 @@ public class Tests {
             throw new RuntimeException(e);
         }
         logger.info(() -> "Sum of 1 through 10 = " + sum);
-        Callable<Double> callable1 = () -> {
-            return 1000 * Math.pow(1.02, 5);
-        };
+        //Callable<Double> callable1 = () -> {
+        //    return 1000 * Math.pow(1.02, 5);
+        //};
         Callable<String> callable2 = () -> {
             StringBuilder sb = new StringBuilder("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
             return sb.reverse().toString();
