@@ -21,7 +21,6 @@ public class App {
             ()->{try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } System.out.println("done"); return 1;},
             TaskType.OTHER
@@ -49,5 +48,7 @@ public class App {
         exx.submit(c);
         exx.submit(t2);
         exx.submit(t3);
+
+        exx.shutdown();
     }
 }

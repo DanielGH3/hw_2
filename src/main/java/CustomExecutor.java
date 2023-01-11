@@ -25,7 +25,7 @@ public class CustomExecutor {
             protected void afterExecute(Runnable runnable, Throwable t) {
                 Task<?> task = (Task<?>)runnable;
                 priorities[task.getPriorityValue() - DEFUALT_MIN_PRIORATY]--;
-                super.execute(runnable);
+                super.afterExecute(runnable, t);
             }
         };
 
